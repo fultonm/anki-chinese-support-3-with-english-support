@@ -389,7 +389,7 @@ def update_fields(note, focus_field, fields):
 
             if not english:
                 english = get_first(config['fields']['english'], copy)
-                
+
             fill_ipa(english, copy)
             fill_english_sound(english, copy)
         else:
