@@ -20,6 +20,7 @@
 from .color import colorize, colorize_dict, colorize_fuse
 from .freq import get_frequency
 from .hanzi import get_silhouette, get_simp, get_trad, split_hanzi
+from .ipa import get_ipa
 from .main import config, dictionary
 from .sound import sound
 from .transcribe import (
@@ -237,6 +238,17 @@ def fill_color(hanzi, note):
         colorized = colorize_fuse(hanzi, cantoTrans)
         set_all(config['fields']['colorCantonese'], note, to=colorized)
 
+def fill_ipa(english, note):
+    for f in config['fields']['ipa']:
+        if f in note and note[f] == '':
+            ipa = get_ipa(english)
+            if ipa:
+                note[f] = ipa
+                updated += 1
+            else:
+                errors += 1
+
+    return updated, errors
 
 def fill_sound(hanzi, note):
     updated = 0
@@ -244,6 +256,20 @@ def fill_sound(hanzi, note):
     for f in config['fields']['sound'] + config['fields']['mandarinSound']:
         if f in note and note[f] == '':
             s = sound(hanzi, config['speech'])
+            if s:
+                note[f] = s
+                updated += 1
+            else:
+                errors += 1
+    return updated, errors
+
+
+def fill_english_sound(english, note):
+    updated = 0
+    errors = 0
+    for f in config['fields']['englishSound']:
+        if f in note and note[f] == '':
+            s = sound(english.strip(), config['englishSpeech'])
             if s:
                 note[f] = s
                 updated += 1
@@ -326,6 +352,7 @@ def fill_all_rubies(hanzi, note):
 def update_fields(note, focus_field, fields):
     copy = dict(note)
     hanzi = get_first(config['fields']['hanzi'], copy)
+    english = get_first(config['fields']['english'], copy)
     if not hanzi:
         return False
     hanzi = cleanup(hanzi)
@@ -350,6 +377,8 @@ def update_fields(note, focus_field, fields):
             fill_trad(hanzi, copy)
             fill_color(hanzi, copy)
             fill_sound(hanzi, copy)
+            fill_ipa(english, copy)
+            fill_english_sound(english, copy)
             fill_simp(hanzi, copy)
             fill_frequency(hanzi, copy)
             fill_all_rubies(hanzi, copy)

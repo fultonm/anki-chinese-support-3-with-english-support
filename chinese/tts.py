@@ -48,8 +48,9 @@ class AudioDownloader:
         if not self.func:
             raise NotImplementedError(self.service)
 
+        print('download: self.path is ' + self.path)
         self.func()
-
+        
         return basename(self.path)
 
     def get_google(self):

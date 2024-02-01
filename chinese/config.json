@@ -3,6 +3,7 @@
     "version": "0.17.0",
     "enabledModels": [],
     "speech": "google|zh-CN",
+    "englishSpeech": "google|en-US",
     "target": "pinyin",
     "max_examples": -1,
     "fields": {
@@ -68,12 +69,19 @@
             "注音符號",
             "註音符號"
         ],
+        "ipa": [
+            "IPA"
+        ],
         "sound": [
             "Audio",
             "Sound",
             "Spoken",
             "声音",
             "聲音"
+        ],
+        "englishSound": [
+            "English Audio",
+            "English Sound"
         ],
         "mandarinSound": [
             "Sound (Mandarin)"

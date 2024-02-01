@@ -91,6 +91,7 @@ def load_menu():
         lambda: openLink(CSR_GITHUB_URL + '/issues'),
     )
     add_menu_item('Chinese::Help', ('About...'), showAbout)
+    add_menu_item('Chinese::Help', ('爱曼迪'), showAbout)
 
 
 def unload_menu():

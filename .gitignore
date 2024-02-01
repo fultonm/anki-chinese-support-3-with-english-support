@@ -10,6 +10,7 @@ chinese/config_saved.json
 chinese/meta.json
 Pipfile.lock
 venv
+.venv
 .idea
 tests/meta.json
 .DS_Store

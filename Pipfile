@@ -11,6 +11,7 @@ hypothesis = ">=4.11.6"
 markdown2 = ">=2.3.8"
 pytest = ">=4.3.1"
 pytest-cov = ">=2.6.1"
+eng_to_ipa = ">=0.0.2"
 
 [requires]
 python_version = 3.9

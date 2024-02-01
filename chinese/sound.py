@@ -29,8 +29,8 @@ def sound(hanzi, source=None):
 
     from .ruby import ruby_bottom, has_ruby
 
-    if not has_hanzi(hanzi):
-        return ''
+    # if not has_hanzi(hanzi):
+    #     return ''
 
     if not source:
         source = config['speech']

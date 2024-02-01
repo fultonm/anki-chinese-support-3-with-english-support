@@ -84,7 +84,7 @@ def bulk_fill_all():
     mw.progress.start(immediate=True, min=0, max=len(note_ids))
     n_updated = 0
     n_failed = 0  # FIXME
-    exclude = config.get_fields(['sound', 'mandarinSound', 'cantoneseSound'])
+    exclude = config.get_fields(['sound', 'englishSound', 'mandarinSound', 'cantoneseSound'])
 
     for i, nid in enumerate(note_ids):
         note = mw.col.get_note(nid)
@@ -120,7 +120,7 @@ def bulk_fill_sound():
         ),
     )
 
-    fields = config.get_fields(['sound', 'mandarinSound', 'cantoneseSound'])
+    fields = config.get_fields(['sound', 'mandarinSound', 'cantoneseSound', 'englishSound'])
 
     if not askUser(prompt):
         return

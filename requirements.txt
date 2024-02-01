@@ -6,3 +6,4 @@ pytest-cov>=2.6.1
 pytest>=4.3.1
 requests
 markdown2
+eng_to_ipa>=0.0.2
