@@ -18,4 +18,5 @@
 import eng_to_ipa as ipa
 
 def get_ipa(english):
+    print(dir(ipa))
     return ipa.convert(english)

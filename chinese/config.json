@@ -70,7 +70,8 @@
             "註音符號"
         ],
         "ipa": [
-            "IPA"
+            "IPA",
+            "IPA Transliteration"
         ],
         "sound": [
             "Audio",

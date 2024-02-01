@@ -238,7 +238,10 @@ def fill_color(hanzi, note):
         colorized = colorize_fuse(hanzi, cantoTrans)
         set_all(config['fields']['colorCantonese'], note, to=colorized)
 
+
 def fill_ipa(english, note):
+    updated = 0
+    errors = 0
     for f in config['fields']['ipa']:
         if f in note and note[f] == '':
             ipa = get_ipa(english)
@@ -249,6 +252,7 @@ def fill_ipa(english, note):
                 errors += 1
 
     return updated, errors
+
 
 def fill_sound(hanzi, note):
     updated = 0
@@ -377,13 +381,17 @@ def update_fields(note, focus_field, fields):
             fill_trad(hanzi, copy)
             fill_color(hanzi, copy)
             fill_sound(hanzi, copy)
-            fill_ipa(english, copy)
-            fill_english_sound(english, copy)
             fill_simp(hanzi, copy)
             fill_frequency(hanzi, copy)
             fill_all_rubies(hanzi, copy)
             fill_silhouette(hanzi, copy)
             fill_usage(hanzi, copy)
+
+            if not english:
+                english = get_first(config['fields']['english'], copy)
+                
+            fill_ipa(english, copy)
+            fill_english_sound(english, copy)
         else:
             erase_fields(copy, config.get_fields())
     elif focus_field in config['fields']['pinyin']:

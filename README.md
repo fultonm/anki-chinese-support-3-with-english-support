@@ -1,3 +1,9 @@
+# A note about this version with English learning support
+
+My girlfriend and I study language together using this addon. She said it would be useful to have English pronunciation and IPA on each card, so I wanted to add these features to my special version of the addon. I implemented these features to the extent that they work for me. Some of the known issues are listed in the Issues tab.
+
+Feel free to use this version, and submit a PR if you have a change that you think would be useful to others. I do plan to merge upstream into this from time to time.
+
 # Chinese Support 3
 
 Chinese Support 3 is an Anki 23.10-compatible version of the [original](https://github.com/ttempe/chinese-support-addon) Chinese Support add-on and its [redux version](https://github.com/luoliyan/chinese-support-redux). I have tested it on 2.1.66 which seems to work, no testing has been done on earlier versions though. It offers a number of features that streamline the process of creating flashcards for learning Chinese. Some of the features had stopped working, and after taking my time to get these back going I thought that I might as well publish it for others to use.

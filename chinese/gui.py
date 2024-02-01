@@ -34,6 +34,7 @@ from .fill import (
     bulk_fill_sound,
     bulk_fill_transcript,
     bulk_fill_usage,
+    bulk_fill_ipa
 )
 from .main import config
 
@@ -77,6 +78,7 @@ def load_menu():
     add_menu_item('Chinese::Bulk Fill', ('Hanzi'), bulk_fill_hanzi)
     add_menu_item('Chinese::Bulk Fill', ('Definitions'), bulk_fill_defs)
     add_menu_item('Chinese::Bulk Fill', ('Transcripts'), bulk_fill_transcript)
+    add_menu_item('Chinese::Bulk Fill', ('IPA'), bulk_fill_ipa)
     add_menu_item('Chinese::Bulk Fill', ('Classifiers'), bulk_fill_classifiers)
     add_menu_item('Chinese::Bulk Fill', ('Sound'), bulk_fill_sound)
     add_menu_item('Chinese::Bulk Fill', ('Silhouette'), bulk_fill_silhouette)

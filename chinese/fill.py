@@ -34,9 +34,11 @@ from .behavior import (
     fill_silhouette,
     fill_simp,
     fill_sound,
+    fill_english_sound,
     fill_trad,
     fill_transcript,
     fill_usage,
+    fill_ipa,
     update_fields,
 )
 from .hanzi import get_hanzi
@@ -110,6 +112,62 @@ def bulk_fill_all():
         '<b>Processed:</b> {}<br>'.format(len(note_ids))
     )
 
+def bulk_fill_ipa():
+    prompt = PROMPT_TEMPLATE.format(
+        field_names='<i>IPA</i>', extra_info=''
+    )
+
+    fields = config.get_fields(
+        ['ipa']
+    )
+
+    if not askUser(prompt):
+        return
+
+    d_has_fields = 0
+    d_added_ipa = 0
+    n_updated = 0
+
+    note_ids = mw.col.find_notes('deck:current')
+    mw.progress.start(immediate=True, min=0, max=len(note_ids))
+
+    for i, nid in enumerate(note_ids):
+        note = mw.col.get_note(nid)
+        copy = dict(note)
+
+        if has_any_field(copy, fields) and has_any_field(
+            config['fields']['hanzi'], copy
+        ):
+            d_has_fields += 1
+
+            msg = '''
+            <b>Processing:</b> %(hanzi)s<br>
+            <b>Filled IPA:</b> %(ipa)d notes<br>
+            <b>Updated: </b>%(updated)d fields''' % {
+                'hanzi': get_hanzi(copy),
+                'ipa': d_added_ipa,
+                'updated': n_updated,
+            }
+            mw.progress.update(label=msg, value=i)
+
+            english = get_first(config['fields']['english'], copy)
+            results, errors = fill_ipa(english, copy)
+
+            if results > 0:
+                d_added_ipa += 1
+
+            save_note(note, copy)
+
+    mw.progress.finish()
+    msg = '''
+    <b>Processed:</b> %(hanzi)s<br>
+    <b>Filled IPA:</b> %(ipa)d notes<br>
+    <b>Updated: </b>%(updated)d fields''' % {
+        'hanzi': get_hanzi(copy),
+        'ipa': d_added_ipa,
+        'updated': n_updated,
+    }
+    showInfo(msg)
 
 def bulk_fill_sound():
     prompt = PROMPT_TEMPLATE.format(
@@ -120,7 +178,8 @@ def bulk_fill_sound():
         ),
     )
 
-    fields = config.get_fields(['sound', 'mandarinSound', 'cantoneseSound', 'englishSound'])
+    chinese_sound_fields = config.get_fields(['sound', 'mandarinSound', 'cantoneseSound'])
+    english_sound_fields = config.get_fields(['englishSound'])
 
     if not askUser(prompt):
         return
@@ -137,15 +196,16 @@ def bulk_fill_sound():
         orig = mw.col.get_note(nid)
         copy = dict(orig)
 
-        if has_any_field(copy, fields) and has_any_field(
+        if has_any_field(copy, chinese_sound_fields) and has_any_field(
             config['fields']['hanzi'], copy
         ):
             d_has_fields += 1
             hanzi = get_first(config['fields']['hanzi'], copy)
+            english = get_first(config['fields']['english'], copy)
 
-            if all_fields_empty(copy, fields):
+            if all_fields_empty(copy, chinese_sound_fields):
                 msg = '''
-                <b>Processing:</b> %(hanzi)s<br>
+                <b>Processing Chinese sound for:</b> %(hanzi)s<br>
                 <b>Updated:</b> %(n_updated)d notes<br>
                 <b>Failed:</b> %(n_failed)d notes''' % {
                     'hanzi': get_hanzi(copy),
@@ -154,6 +214,24 @@ def bulk_fill_sound():
                 }
                 mw.progress.update(label=msg, value=i)
                 s, f = fill_sound(hanzi, copy)
+                n_updated += s
+                n_failed += f
+                save_note(orig, copy)
+                sleep(5)
+            else:
+                d_already_had_sound += 1
+
+            if all_fields_empty(copy, english_sound_fields):
+                msg = '''
+                <b>Processing English sound for:</b> %(hanzi)s<br>
+                <b>Updated:</b> %(n_updated)d notes<br>
+                <b>Failed:</b> %(n_failed)d notes''' % {
+                    'hanzi': get_hanzi(copy),
+                    'n_updated': n_updated,
+                    'n_failed': n_failed,
+                }
+                mw.progress.update(label=msg, value=i)
+                s, f = fill_english_sound(english, copy)
                 n_updated += s
                 n_failed += f
                 save_note(orig, copy)
