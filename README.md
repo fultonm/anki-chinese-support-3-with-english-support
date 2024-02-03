@@ -1,6 +1,8 @@
 # A note about this version with English learning support
 
-My girlfriend and I study language together using this addon. She said it would be useful to have English pronunciation and IPA on each card, so I wanted to add these features to my special version of the addon. I implemented these features to the extent that they work for me. Some of the known issues are listed in the Issues tab.
+This version of the addon was hacked together to add support for English studying as well.
+
+My girlfriend and I study language together using this addon, and we need the deck support both a native English speaker studying Chinese, and a native Chinese speaker studying English. She said it would be useful to have English pronunciation and IPA on each card, so I wanted to add these features to this version of the addon. I implemented these features to the extent that they work for me. Some of the known issues are listed in the Issues tab, but it's hard to find time to fix them between work and studying Chinese and having a girlfriend.. "it works for me"
 
 Feel free to use this version, and submit a PR if you have a change that you think would be useful to others. I do plan to merge upstream into this from time to time.
 
