@@ -33,6 +33,7 @@ from .transcribe import (
 from .translate import translate
 from .util import (
     cleanup,
+    cleanup_english,
     erase_fields,
     flatten,
     get_first,
@@ -273,7 +274,7 @@ def fill_english_sound(english, note):
     errors = 0
     for f in config['fields']['englishSound']:
         if f in note and note[f] == '':
-            s = sound(english.strip(), config['englishSpeech'])
+            s = sound(english, config['englishSpeech'])
             if s:
                 note[f] = s
                 updated += 1
@@ -389,6 +390,8 @@ def update_fields(note, focus_field, fields):
 
             if not english:
                 english = get_first(config['fields']['english'], copy)
+
+            english = cleanup_english(english)
 
             fill_ipa(english, copy)
             fill_english_sound(english, copy)

@@ -77,6 +77,14 @@ def cleanup(text):
     text = sub(CLOZE_REGEX, r'\1', text)
     return text
 
+def cleanup_english(text):
+    if text is None:
+        return ''
+    if not text.strip():
+        return ''
+    text = sub(r'[^ -~]+', '', text)
+    return text
+
 
 def no_html(text):
     return sub(r'<.*?>', '', text, flags=DOTALL)
