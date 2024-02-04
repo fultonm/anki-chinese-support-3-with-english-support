@@ -83,7 +83,7 @@ def cleanup_english(text):
     if not text.strip():
         return ''
     text = sub(r'[^ -~]+', '', text)
-    return text
+    return text.strip()[:100]
 
 
 def no_html(text):
