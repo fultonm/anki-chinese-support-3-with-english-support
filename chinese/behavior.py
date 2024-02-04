@@ -240,11 +240,11 @@ def fill_color(hanzi, note):
         set_all(config['fields']['colorCantonese'], note, to=colorized)
 
 
-def fill_ipa(english, note):
+def fill_ipa(english, note, overwrite=False):
     updated = 0
     errors = 0
     for f in config['fields']['ipa']:
-        if f in note and note[f] == '':
+        if f in note and (note[f] == '' or overwrite):
             ipa = get_ipa(english)
             if ipa:
                 note[f] = ipa
@@ -269,11 +269,11 @@ def fill_sound(hanzi, note):
     return updated, errors
 
 
-def fill_english_sound(english, note):
+def fill_english_sound(english, note, overwrite=False):
     updated = 0
     errors = 0
     for f in config['fields']['englishSound']:
-        if f in note and note[f] == '':
+        if f in note and (note[f] == '' or overwrite):
             s = sound(english, config['englishSpeech'])
             if s:
                 note[f] = s
@@ -353,7 +353,6 @@ def fill_all_rubies(hanzi, note):
     ]:
         fill_ruby(hanzi, note, trans_group, ruby_group)
 
-
 def update_fields(note, focus_field, fields):
     copy = dict(note)
     hanzi = get_first(config['fields']['hanzi'], copy)
@@ -369,9 +368,15 @@ def update_fields(note, focus_field, fields):
         + config['fields']['bopomofo']
     )
 
+    english_fields = (config['fields']['english'])
+    
     if focus_field in transcript_fields:
         fill_color(hanzi, copy)
         fill_all_rubies(hanzi, copy)
+
+    if focus_field in english_fields:
+        fill_ipa(english, copy, overwrite=True)
+        fill_english_sound(english, copy, overwrite=True)
 
     if focus_field in config['fields']['hanzi']:
         if copy[focus_field]:
