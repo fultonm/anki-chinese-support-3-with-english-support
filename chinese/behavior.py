@@ -375,6 +375,7 @@ def update_fields(note, focus_field, fields):
         fill_all_rubies(hanzi, copy)
 
     if focus_field in english_fields:
+        english = cleanup_english(english)
         fill_ipa(english, copy, overwrite=True)
         fill_english_sound(english, copy, overwrite=True)
 
