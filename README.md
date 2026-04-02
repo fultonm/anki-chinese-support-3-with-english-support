@@ -1,28 +1,37 @@
-# A note about this version with English learning support
+# Anki Chinese Support with English Support
 
-This version of the addon was hacked together to add support for English studying as well.
+## Overview
+This is an extended version of the Chinese Support 3 Anki add-on with added support for English language learning. This add-on provides automatic field filling for language learners, supporting both Chinese-to-English and English-to-Chinese study decks.
 
-My girlfriend and I study language together using this addon, and we need the deck support both a native English speaker studying Chinese, and a native Chinese speaker studying English. She said it would be useful to have English pronunciation and IPA on each card, so I wanted to add these features to this version of the addon. I implemented these features to the extent that they work for me. Some of the known issues are listed in the Issues tab, but it's hard to find time to fix them between work and studying Chinese and having a girlfriend.. "it works for me"
+## Features
 
-Feel free to use this version, and submit a PR if you have a change that you think would be useful to others. I do plan to merge upstream into this from time to time.
+### Automatic Field Filling
+- **Translation** (from built-in dictionary; supports English, German and French)
+- **Romanisation** (supports [Pīnyīn (拼音)](https://en.wikipedia.org/wiki/Pinyin) and Cantonese [Jyutping (粵拼)](https://en.wikipedia.org/wiki/Jyutping))
+- **Mandarin Audio** (fetched from Google or Baidu)
+- **Traditional (繁體字) and Simplified (簡體字) characters**
+- **[Bopomofo (ㄅㄆㄇㄈ)](https://en.wikipedia.org/wiki/Bopomofo)**, also known as Zhuyin (注音)
+- **[Rubies](https://www.w3schools.com/tags/tag_ruby.asp)** (small-print transcription placed above characters)
+- **Frequency** (from "very basic" to "obscure") - based on [anki-chinese-word-frequency](https://github.com/ernop/anki-chinese-word-frequency)
+- **Usage Sentence Examples** - Chinese/English sentence pairs from [Tatoeba](https://tatoeba.org/)
 
-After following the below instructions to use the addon, you need to update the Fields on Chinese (Basic) to have the following 2 additional fields:
+### Additional Features
+- Automatic tone change of auto-filled pinyin (hanzi field must be populated)
+  - E.g. fen1kai1 -> *Tab* -> fēnkāi (won't replace existing tones)
+- Tone colours (applied to characters, romanisation and Bopomofo)
+- Built-in note types (Basic and Advanced)
+
+## English Learning Support
+
+This version includes enhancements for English language learners. After following the standard installation instructions, you may need to update the Fields on Chinese (Basic) to include the following additional fields if desired:
 - English Sound
 - IPA
-
-This is another thing I plan to add to this repo, but I've already done it for myself in my live Anki app, so I leave that as an excerise to the user, or anyone who would like to create the PR.
-
-# Chinese Support 3
-
-Chinese Support 3 is an Anki 23.10-compatible version of the [original](https://github.com/ttempe/chinese-support-addon) Chinese Support add-on and its [redux version](https://github.com/luoliyan/chinese-support-redux). I have tested it on 2.1.66 which seems to work, no testing has been done on earlier versions though. It offers a number of features that streamline the process of creating flashcards for learning Chinese. Some of the features had stopped working, and after taking my time to get these back going I thought that I might as well publish it for others to use.
-
-Please note that the add-on is still in beta and is sometimes shipped in an unstable state. Please upgrade with each new release and report any issues on GitHub. The automated test suite is a work-in-progress, so I still rely heavily on user reports to supplement my own manual testing.
 
 ## Important Notes
 
 - The templates can be found under 'Choose Note Type' -> 'Manage' -> 'Add'
 - **If you have previously downloaded corrupted TTS sound files with the redux addon, these need to be removed and downloaded again for the sound to work.**
-- If you find that a field is not filling at all, please check [config.json](https://github.com/luoliyan/chinese-support-redux/blob/master/chinese/config.json) for the complete list of valid field names. For those migrating from an older version of the add-on, you will need to rename any definition fields to `English`, `German` or `French`, depending on what you want.
+- If you find that a field is not filling at all, please check [config.json](https://github.com/luoliyan/chinese-support-redux/blob/master/chinese/config.json) for the complete list of valid fields
 - If tone colours are not showing, ensure that the styling section of the template contains the following CSS:
 
 ```css
@@ -33,29 +42,11 @@ Please note that the add-on is still in beta and is sometimes shipped in an unst
 .tone5 {color: gray;}
 ```
 
-## Features
-
-- Automatic field filling
-  - Translation (from built-in dictionary; supports English, German and French)
-  - Romanisation (supports [Pīnyīn (拼音)](https://en.wikipedia.org/wiki/Pinyin) and Cantonese [Jyutping (粵拼)](https://en.wikipedia.org/wiki/Jyutping))
-  - Mandarin Audio (fetched from Google or Baidu)
-  - Traditional (繁體字) and simplified (簡體字) characters
-  - [Bopomofo (ㄅㄆㄇㄈ)](https://en.wikipedia.org/wiki/Bopomofo), also known as Zhuyin (注音)
-  - [Rubies](https://www.w3schools.com/tags/tag_ruby.asp) (small-print transcription placed above characters)
-  - Frequency (from “very basic” to “obscure”) - based on [anki-chinese-word-frequency](https://github.com/ernop/anki-chinese-word-frequency)
-  - Usage Sentence Examples - Chinese/English sentence pairs from [Tatoeba](https://tatoeba.org/)
-- Automatic tone change of auto filled pinyin (hanzi field must be populated)
-  - E.g. fen1kai1 -> *Tab* -> fēnkāi (won't replace existing tones)
-- Tone colours (applied to characters, romanisation and Bopomofo)
-- Built-in note types (Basic and Advanced)
-
 ## Status
 
-I do occasionally run into problems with the addon, but so far I have been able to solve all of them by at worst restarting Anki. For the time being I plan to only release minor maintenence updates, but I do have more features in mind when I have more time available.
+The add-on is in beta. This means the core functionality works reliably, but there may be occasional edge cases. Please make a backup before trying the add-on and report any issues you encounter.
 
 The vast majority of features have been successfully ported, and the add-on is in a usable state, albeit with some definite rough edges.
-
-The add-on is still in beta. By this I mean “it works, but I wouldn’t trust it with my children”. Expect occasional issues, and please make a back-up before trying it. I use it myself and haven't experienced data loss, but _your_ mileage may vary.
 
 Please report any issues [here](https://github.com/Gustaf-C/anki-chinese-support/issues) on GitHub. Feature requests are also welcome. Pull requests even more so.
 
@@ -63,9 +54,9 @@ If you are new to the Chinese Support add-on, the wiki from the previous version
 
 ## Usage
 
-The core feature of the add-on is the automatic field filling. To take advantage of this, you need to have an Anki note type with the appropriate fields (e.g., `Hanzi`, `English`, `Pinyin`, `Sound`). See `config.json` for a list of valid field names.
+The core feature of the add-on is the automatic field filling. To take advantage of this, you need to have an Anki note type with the appropriate fields (e.g., `Hanzi`, `English`, `Pinyin`, `Sound`, etc.).
 
-If you don't already have such a note type, the easiest approach is to use one of the built-in models. Two types are installed automatically: Basic and Advanced. The only important difference is that the Advanced model shows more information.
+If you don't already have such a note type, the easiest approach is to use one of the built-in models. Two types are installed automatically: Basic and Advanced.
 
 To use the field-filling features:
 
@@ -76,19 +67,15 @@ To use the field-filling features:
 5. Press *Tab*
 6. The remaining fields should then be populated automatically
 
-<br>
-
 ## Screenshots
 
 ![Screenshot #1](https://raw.githubusercontent.com/Gustaf-C/anki-chinese-support/master/screenshots/add-card.png)
 
 ![Screenshot #2](https://raw.githubusercontent.com/Gustaf-C/anki-chinese-support/master/screenshots/view-card.png)
 
-<br>
-
 ## Support
 
-If you encounter any issues, the best way to have these addressed is to [raise them on GitHub](https://github.com/Gustaf-C/anki-chinese-support/issues). Feature requests are welcome, with the caveat that all good things take time. Pull request to fix any issues are even more welcome.
+If you encounter any issues, the best way to have these addressed is to [raise them on GitHub](https://github.com/Gustaf-C/anki-chinese-support/issues). Feature requests are welcome. Pull requests are especially appreciated.
 
 ## Known Issues
 
